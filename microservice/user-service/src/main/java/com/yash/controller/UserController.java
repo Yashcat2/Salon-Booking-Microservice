@@ -19,6 +19,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
 
+    @Autowired
+    private UserRepository userRepository;
+
     private IUserService userService;
     @PostMapping("/api/users")
     public ResponseEntity<User> createUser(@RequestBody @Valid User user){
@@ -35,7 +38,7 @@ public class UserController {
 
     }
 
-    @GetMapping("/api/user/{userId}")
+    @GetMapping("/api/users/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable("userId") Long id) throws Exception{
 
         User user = userService.getUserById(id);

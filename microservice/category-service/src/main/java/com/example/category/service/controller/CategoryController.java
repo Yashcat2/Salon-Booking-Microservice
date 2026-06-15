@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/categories")
 @RequiredArgsConstructor
 public class CategoryController {
 
@@ -23,5 +23,11 @@ public class CategoryController {
         Set<Category> categories = categoryService.getAllCategriesBySalon(id);
         return ResponseEntity.ok(categories);
 
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Category> getCategoryById(@PathVariable Long id) throws Exception {
+        Category category = categoryService.getCategoryById(id);
+        return ResponseEntity.ok(category);
     }
 }

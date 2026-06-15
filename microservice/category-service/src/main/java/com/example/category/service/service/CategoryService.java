@@ -18,7 +18,7 @@ public class CategoryService implements ICategoryService{
     public Category saveCategory(Category category, SalonDTO salonDTO) {
         Category newCategory = new Category();
         newCategory.setName(category.getName());
-        newCategory.setSalonId(category.getSalonId());
+        newCategory.setSalonId(salonDTO.getId());
         newCategory.setImage(category.getImage());
 
         return categoryRepository.save(newCategory);
@@ -31,12 +31,10 @@ public class CategoryService implements ICategoryService{
 
     @Override
     public Category getCategoryById(Long id) throws Exception {
-        Category category = new Category();
+        Category category = categoryRepository.findById(id).orElse(null);
         if (category == null){
-            throw new Exception("category not existed");
-
+            throw new Exception("category not existed id: " + id);
         }
-
         return category;
     }
 
